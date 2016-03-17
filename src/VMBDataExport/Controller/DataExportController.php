@@ -23,7 +23,7 @@ class DataExportController extends AbstractActionController
 
                 $this->redirect_to = $data['redirect_to'];
 
-                $mainService = $this->getServiceLocator()->get('VMBDataExport\Service\MainService');
+                $mainService = $this->getPluginManager()->getServiceLocator()->get('VMBDataExport\Service\MainService');
                 $filePath = $mainService->strategy($data['type'],$data);
 
                 return $this->redirect()->toUrl($filePath);
