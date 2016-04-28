@@ -1,6 +1,6 @@
-## vmb-zf2-data-export-module
+# vmb-zf2-data-export-module
 
-### Instalação
+## Instalação
 
 Rode
 `php composer.phar vitorbarros/vmb-zf2-data-export-module`
