@@ -1,4 +1,4 @@
-# vmb-zf2-data-export-module
+# ZF2 Data Export Module
 
 ## Instalação
 
