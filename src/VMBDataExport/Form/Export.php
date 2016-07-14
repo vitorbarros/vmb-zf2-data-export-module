@@ -1,51 +1,61 @@
 <?php
 namespace VMBDataExport\Form;
 
-use Zend\Form\Form;;
+use Zend\Form\Form;
+
+;
 
 class Export extends Form
 {
 
-    public function __construct($name = null) {
+    public function __construct($name = null)
+    {
 
         parent::__construct('dataExport');
 
-        $this->setAttribute('method','post');
+        $this->setAttribute('method', 'post');
 
         //field de email
         $this->add(array(
-            'name'  =>  'entity',
+            'name' => 'entity',
             'attributes' => array(
                 'id' => 'entity',
             ),
         ));
 
         $this->add(array(
-            'name'  =>  'criteria',
+            'name' => 'criteria',
             'attributes' => array(
                 'id' => 'criteria',
             ),
         ));
 
         $this->add(array(
-            'name'  =>  'type',
+            'name' => 'type',
             'attributes' => array(
                 'id' => 'type',
             ),
         ));
 
         $this->add(array(
-            'name'  =>  'redirect_to',
+            'name' => 'redirect_to',
             'attributes' => array(
                 'id' => 'redirect_to',
             ),
         ));
 
         $this->add(array(
-            'name'  =>  'headers',
+            'name' => 'headers',
             'attributes' => array(
                 'id' => 'headers',
             ),
+        ));
+
+        $this->add(array(
+            'name' => 'custom',
+            'attributes' => array(
+                'id' => 'custom'
+            )
         ));
 
         $this->add(array(

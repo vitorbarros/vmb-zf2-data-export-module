@@ -54,7 +54,6 @@ class CSVExport implements ExportDataServiceInterface
 
     public function export()
     {
-
         $path = __DIR__ . '/../../../../../../public/csv/';
         if (!is_dir($path)) {
             throw new \Exception("Please make sure that 'public/csv' directory exists");
@@ -69,7 +68,22 @@ class CSVExport implements ExportDataServiceInterface
 
         fclose($file);
         return '/csv/' . $fileName;
-
     }
 
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function writeCustomData(array $data)
+    {
+        // TODO: Implement writeCustomData() method.
+    }
+
+    /**
+     * @return mixed
+     */
+    public function exportCustomData()
+    {
+        // TODO: Implement exportCustomData() method.
+    }
 }

@@ -16,37 +16,35 @@ class MainService
      */
     protected $responsableClass;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
-    public function strategy($exportType, array $dados) {
-
-        if($exportType != null) {
+    public function strategy($exportType, array $data)
+    {
+        if ($exportType != null) {
 
             $type = strtoupper($exportType);
-            $class = 'VMBDataExport\\Export\\'.$type.'Export';
+            $class = 'VMBDataExport\\Export\\' . $type . 'Export';
 
-            if(class_exists($class)) {
+            if (class_exists($class)) {
 
-                if(null === $this->responsableClass) {
+                if (null === $this->responsableClass) {
                     $this->responsableClass = new $class($this->em);
                 }
-
-                if($this->responsableClass instanceof Export\ExportDataServiceInterface) {
-
-                    $this->responsableClass->writeData($dados);
+                if ($this->responsableClass instanceof Export\ExportDataServiceInterface) {
+                    if (isset($data['custom']) && $data['custom'] != null) {
+                        $this->responsableClass->writeCustomData($data);
+                        return $this->responsableClass->exportCustomData();
+                    }
+                    $this->responsableClass->writeData($data);
                     return $this->responsableClass->export();
-
-                }else
-                    throw new \Exception("Class {$class} must implements 'DataExport\\Export\\ExportDataServiceInterface' ");
-
-            }else
-                throw new \Exception("Class {$class} does not exist");
-
-        }else
-            throw new \Exception("Type can not be null");
-
+                }
+                throw new \Exception("Class {$class} must implements 'VMBDataExport\\Export\\ExportDataServiceInterface' ");
+            }
+            throw new \Exception("Class {$class} does not exist");
+        }
+        throw new \Exception("Type can not be null");
     }
-
 }

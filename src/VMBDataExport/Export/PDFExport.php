@@ -15,7 +15,7 @@ class PDFExport implements ExportDataServiceInterface
     {
         $this->em = $em;
     }
-    
+
     public function writeData(array $dados)
     {
         //TODO implement this action
@@ -24,5 +24,22 @@ class PDFExport implements ExportDataServiceInterface
     public function export()
     {
         //TODO implement this action
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function writeCustomData(array $data)
+    {
+        // TODO: Implement writeCustomData() method.
+    }
+
+    /**
+     * @return mixed
+     */
+    public function exportCustomData()
+    {
+        // TODO: Implement exportCustomData() method.
     }
 }

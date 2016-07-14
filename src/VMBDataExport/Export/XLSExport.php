@@ -44,12 +44,9 @@ class XLSExport implements ExportDataServiceInterface
             foreach ($this->headers as $head) {
                 $resultFormated['result'][$head] = $arrayData[$head];
             }
-
             $result[] = $resultFormated['result'];
         }
-
         $this->resultFormatedData = $result;
-
     }
 
     public function export()
@@ -89,5 +86,22 @@ class XLSExport implements ExportDataServiceInterface
         fputs($file, utf8_decode($html));
         fclose($file);
         return '/xls/' . $fileName;
+    }
+
+    /**
+     * @param array $data
+     * @return mixed
+     */
+    public function writeCustomData(array $data)
+    {
+        // TODO: Implement writeCustomData() method.
+    }
+
+    /**
+     * @return mixed
+     */
+    public function exportCustomData()
+    {
+        // TODO: Implement exportCustomData() method.
     }
 }
