@@ -16,11 +16,13 @@ class CSVExport implements ExportDataServiceInterface
     private $resultFormatedData;
     private $headers;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
-    public function writeData(array $dados) {
+    public function writeData(array $dados)
+    {
 
         $entity = null;
         $criteria = Json::decode($dados['criteria'], Json::TYPE_ARRAY);
@@ -31,15 +33,15 @@ class CSVExport implements ExportDataServiceInterface
         $resultFormated = array();
         $entityData = array();
 
-        if(empty($criteria)) {
+        if (empty($criteria)) {
             $entityData = $this->em->getRepository($entity)->findAll();
-        }else{
+        } else {
             $entityData = $this->em->getRepository($entity)->findBy($criteria);
         }
 
-        foreach($entityData as $data) {
+        foreach ($entityData as $data) {
             $arrayData = $data->toArray();
-            foreach($this->headers as $head) {
+            foreach ($this->headers as $head) {
                 $resultFormated['result'][$head] = $arrayData[$head];
             }
 
@@ -50,19 +52,23 @@ class CSVExport implements ExportDataServiceInterface
 
     }
 
-    public function export() {
+    public function export()
+    {
 
-        $path = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/public/csv/';
-        $fileName = str_replace("/",".",base64_encode(Rand::getBytes(6,true)).'_'.date("Y-m-d-H:i:s").'.csv');
-        $file = fopen($path.$fileName,"w");
+        $path = __DIR__ . '/../../../../../../public/csv/';
+        if (!is_dir($path)) {
+            throw new \Exception("Please make sure that 'public/csv' directory exists");
+        }
+        $fileName = str_replace("/", ".", base64_encode(Rand::getBytes(6, true)) . '_' . date("Y-m-d-H:i:s") . '.csv');
+        $file = fopen($path . $fileName, "w");
 
-        fputcsv($file,$this->headers);
-        foreach($this->resultFormatedData as $data) {
-            fputcsv($file,$data);
+        fputcsv($file, $this->headers);
+        foreach ($this->resultFormatedData as $data) {
+            fputcsv($file, $data);
         }
 
         fclose($file);
-        return '/csv/'.$fileName;
+        return '/csv/' . $fileName;
 
     }
 

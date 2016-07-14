@@ -11,22 +11,18 @@ class PDFExport implements ExportDataServiceInterface
      */
     private $em;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
-
-
-    public function writeData(array $dados) {
-        echo '<pre> pdf';
-        print_r($dados);
-        exit;
+    
+    public function writeData(array $dados)
+    {
+        //TODO implement this action
     }
 
-    public function export() {
-
-
-
+    public function export()
+    {
+        //TODO implement this action
     }
-
-
 }
