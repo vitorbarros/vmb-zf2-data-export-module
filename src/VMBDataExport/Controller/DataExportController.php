@@ -7,7 +7,6 @@ use Zend\Mvc\Controller\AbstractActionController;
 
 class DataExportController extends AbstractActionController
 {
-
     use VerifyPostData;
 
     /**

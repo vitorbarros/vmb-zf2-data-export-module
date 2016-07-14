@@ -11,6 +11,9 @@ class MainService
      * @var EntityManager
      */
     protected $em;
+    /**
+     * @var string
+     */
     protected $responsableClass;
 
     public function __construct(EntityManager $em) {

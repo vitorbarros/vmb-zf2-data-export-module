@@ -3,7 +3,6 @@ namespace VMBDataExport;
 
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
-
 use VMBDataExport\Service\MainService;
 
 class Module
