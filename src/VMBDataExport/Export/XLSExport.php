@@ -16,11 +16,13 @@ class XLSExport implements ExportDataServiceInterface
     private $resultFormatedData;
     private $headers;
 
-    public function __construct(EntityManager $em) {
+    public function __construct(EntityManager $em)
+    {
         $this->em = $em;
     }
 
-    public function writeData(array $dados){
+    public function writeData(array $dados)
+    {
 
         $entity = null;
         $criteria = Json::decode($dados['criteria'], Json::TYPE_ARRAY);
@@ -31,15 +33,15 @@ class XLSExport implements ExportDataServiceInterface
         $resultFormated = array();
         $entityData = array();
 
-        if(empty($criteria)) {
+        if (empty($criteria)) {
             $entityData = $this->em->getRepository($entity)->findAll();
-        }else{
+        } else {
             $entityData = $this->em->getRepository($entity)->findBy($criteria);
         }
 
-        foreach($entityData as $data) {
+        foreach ($entityData as $data) {
             $arrayData = $data->toArray();
-            foreach($this->headers as $head) {
+            foreach ($this->headers as $head) {
                 $resultFormated['result'][$head] = $arrayData[$head];
             }
 
@@ -50,38 +52,42 @@ class XLSExport implements ExportDataServiceInterface
 
     }
 
-    public function export() {
+    public function export()
+    {
 
-        $path = dirname(dirname(dirname(dirname(dirname(dirname(__FILE__)))))) . '/public/xls/';
-        $fileName = str_replace("/",".",base64_encode(Rand::getBytes(6,true)).'_'.date("Y-m-d-H:i:s").'.xls');
+        $path = __DIR__ . '/../../../../../../public/xls/';
+        if (!is_dir($path)) {
+            throw new \Exception("Please make sure that 'public/xls' directory exists");
+        }
 
-        $file = fopen($path.$fileName,"w");
+        $fileName = str_replace("/", ".", base64_encode(Rand::getBytes(6, true)) . '_' . date("Y-m-d-H:i:s") . '.xls');
+
+        $file = fopen($path . $fileName, "w");
         $count = 0;
 
         $html = null;
         $html .= "<table>";
         $html .= "<tr>";
-        foreach($this->headers as $headers) {
+        foreach ($this->headers as $headers) {
             $html .= "<th>{$headers}</th>";
         }
         $html .= "</tr>";
-        foreach($this->resultFormatedData as $data) {
-            foreach($data as $colunas) {
+        foreach ($this->resultFormatedData as $data) {
+            foreach ($data as $colunas) {
                 $count++;
-                if($count == 0) {
+                if ($count == 0) {
                     $html .= "<tr>";
                 }
                 $html .= "<td>{$colunas}</td>";
-                if($count == count($this->headers)) {
+                if ($count == count($this->headers)) {
                     $html .= "</tr>";
                     $count = 0;
                 }
             }
         }
 
-        fputs($file,utf8_decode($html));
-        return '/xls/'.$fileName;
-
+        fputs($file, utf8_decode($html));
+        fclose($file);
+        return '/xls/' . $fileName;
     }
-
 }
