@@ -15,7 +15,7 @@ Após, crie o seguinte diertório com permissão de escrita
 
 ## Export de dados através de entidades
 
-`
+`php
 use Zend\Mvc\Controller\AbstractActionController;
 use VMBDataExport\Form\Export;
 
@@ -25,5 +25,4 @@ class YourController extends AbstractCrudController
   {
     
   }
-}
-`
+}`
