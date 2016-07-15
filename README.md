@@ -2,7 +2,7 @@
 
 ## Instalação
 
-# ZF2 Data Export Module
+### ZF2 Data Export Module
 
 Rode
 `php composer.phar vitorbarros/vmb-zf2-data-export-module`
@@ -13,7 +13,15 @@ Após, adicione os seguintes modulos
 Após, crie o seguinte diertório com permissão de escrita
 `data/DoctrineORMModule/Proxy`
 
-## Export de dados através de entidades
+Cria o seguinte diretório
+
+`public/xsl`
+
+`public/pdf`
+
+`public/csv`
+
+### Export de dados através de entidades
 
 ```php
 //controller class
@@ -42,7 +50,6 @@ class YourController extends AbstractCrudController
             'event_descricao',
         )),
     ));
-    
     return new ViewModel(
       array(
           'form' => $form,
