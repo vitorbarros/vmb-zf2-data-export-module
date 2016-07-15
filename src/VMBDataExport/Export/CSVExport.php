@@ -72,18 +72,11 @@ class CSVExport implements ExportDataServiceInterface
 
     /**
      * @param array $data
+     * @param array $headers
      * @return mixed
      */
-    public function writeCustomData(array $data)
+    public function writeCustomData(array $data, array $headers)
     {
         // TODO: Implement writeCustomData() method.
-    }
-
-    /**
-     * @return mixed
-     */
-    public function exportCustomData()
-    {
-        // TODO: Implement exportCustomData() method.
     }
 }

@@ -16,12 +16,8 @@ interface ExportDataServiceInterface
 
     /**
      * @param array $data
+     * @param array $headers
      * @return mixed
      */
-    public function writeCustomData(array $data);
-
-    /**
-     * @return mixed
-     */
-    public function exportCustomData();
+    public function writeCustomData(array $data, array $headers);
 }

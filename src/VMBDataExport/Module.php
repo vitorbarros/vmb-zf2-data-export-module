@@ -1,6 +1,7 @@
 <?php
 namespace VMBDataExport;
 
+use VMBDataExport\Service\CustomExportService;
 use Zend\Mvc\ModuleRouteListener;
 use Zend\Mvc\MvcEvent;
 use VMBDataExport\Service\MainService;
@@ -32,11 +33,13 @@ class Module
 
     public function getServiceConfig()
     {
-
         return array(
             'factories' => array(
                 'VMBDataExport\Service\MainService' => function ($sm) {
                     return new MainService($sm->get('Doctrine\ORM\EntityManager'));
+                },
+                'VMBDataExport\Service\CustomExportService' => function ($sm) {
+                    return new CustomExportService($sm->get('Doctrine\ORM\EntityManager'));
                 }
             ),
         );

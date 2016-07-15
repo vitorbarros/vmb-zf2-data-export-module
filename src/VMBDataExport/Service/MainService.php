@@ -34,10 +34,6 @@ class MainService
                     $this->responsableClass = new $class($this->em);
                 }
                 if ($this->responsableClass instanceof Export\ExportDataServiceInterface) {
-                    if (isset($data['custom']) && $data['custom'] != null) {
-                        $this->responsableClass->writeCustomData($data);
-                        return $this->responsableClass->exportCustomData();
-                    }
                     $this->responsableClass->writeData($data);
                     return $this->responsableClass->export();
                 }
