@@ -12,3 +12,18 @@ Após, adicione os seguintes modulos
 
 Após, crie o seguinte diertório com permissão de escrita
 `data/DoctrineORMModule/Proxy`
+
+## Export de dados através de entidades
+
+`
+use Zend\Mvc\Controller\AbstractActionController;
+use VMBDataExport\Form\Export;
+
+class YourController extends AbstractCrudController
+{
+  public function yourAction()
+  {
+    
+  }
+}
+`
