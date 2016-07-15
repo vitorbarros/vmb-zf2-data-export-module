@@ -16,6 +16,8 @@ Após, crie o seguinte diertório com permissão de escrita
 ## Export de dados através de entidades
 
 ```php
+//controller class
+
 use Zend\Mvc\Controller\AbstractActionController;
 use VMBDataExport\Form\Export;
 
@@ -42,10 +44,27 @@ class YourController extends AbstractCrudController
     ));
     
     return new ViewModel(
-        array(
-            'form' => $form,
-        )
+      array(
+          'form' => $form,
+      )
     );
   }
 }
+
+//view
+<?php $form = $this->form; ?>
+<?php $form->setAttribute('action', '/export'); ?>
+<?php $form->prepare(); ?>
+
+<?php echo $this->form()->openTag($form); ?>
+
+  <?php echo $this->formhidden($form->get('entity')); ?>
+  <?php echo $this->formhidden($form->get('criteria')); ?>
+  <?php echo $this->formhidden($form->get('type')); ?>
+  <?php echo $this->formhidden($form->get('redirect_to')); ?>
+  <?php echo $this->formhidden($form->get('headers')); ?>
+  <?php echo $this->formsubmit($form->get('submit'); ?>
+
+<?php echo $this->form()->closeTag(); ?>
+
 ```
