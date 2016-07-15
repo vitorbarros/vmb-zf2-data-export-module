@@ -13,7 +13,7 @@ Após, adicione os seguintes modulos
 Após, crie o seguinte diertório com permissão de escrita
 `data/DoctrineORMModule/Proxy`
 
-Cria o seguinte diretório
+Cria os seguintes diretórios
 
 `public/xsl`
 
@@ -75,3 +75,76 @@ class YourController extends AbstractCrudController
 <?php echo $this->form()->closeTag(); ?>
 
 ```
+
+### Export de dados com query customizada
+
+```php
+//controller class
+
+use Zend\Mvc\Controller\AbstractActionController;
+use VMBDataExport\Service\CustomExportService;
+
+class YourController extends AbstractCrudController
+{
+
+  /**
+   * @var CustomExportService
+   */
+  private $customExportService;
+
+  /**
+   * ExportController constructor.
+   * @param CustomExportService $customExportService
+   */
+  public function __construct(CustomExportService $customExportService)
+  {
+      $this->customExportService = $customExportService;
+  }
+
+  public function yourAction()
+  {
+    $sql = "select
+              ev.event_data_inicio as data_evento,
+              en.end_cidade as cidade,
+              en.end_estado as estado,
+              COUNT(p.part_id) as participante,
+              us.user_nome as treinadora,
+              ca.cat_nome as modulo
+            from EventosRest\Entity\Participante as p
+            INNER JOIN Evento\Entity\Evento as ev
+            WITH p.evento_event_id = ev.event_id
+            INNER JOIN Evento\Entity\Endereco as en
+            WITH ev.endereco_end_id = en.end_id
+            INNER JOIN Evento\Entity\Categoria as ca
+            WITH ev.categoria_cat_id = ca.cat_id
+            INNER JOIN Evento\Entity\User as u 
+            WITH u.user_id = p.user_user_id
+            INNER JOIN Evento\Entity\Palestrante as pa
+            WITH pa.evento_event_id = p.evento_event_id
+            INNER JOIN Evento\Entity\User as us
+            WITH pa.user_user_id = us.user_id
+            GROUP BY cidade";
+
+    $filePath = $this->customExportService->export($sql, array(
+        'data_evento',
+        'cidade',
+        'estado',
+        'participante',
+        'treinadora',
+        'modulo'
+    ), 'xls');
+
+    return $this->redirect()->toUrl($filePath);
+  }
+}
+
+```
+#### Acesse o navegador
+`yourdomain.com.br/your-export-action`
+
+
+
+
+
+
+
