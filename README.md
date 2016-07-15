@@ -1,4 +1,4 @@
-# vmb-zf2-data-export-module
+# Módulo para exportação de dados em CSV, XSL, e PDF
 
 ## Instalação
 
@@ -142,8 +142,8 @@ class YourController extends AbstractCrudController
 #### Acesse o navegador
 `yourdomain.com.br/your-export-action`
 
-
-
+### TODO
+Finalizar a classe `VMBDataExport\Export\PDFExport`
 
 
 
