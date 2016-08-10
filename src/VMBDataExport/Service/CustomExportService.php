@@ -51,4 +51,22 @@ class CustomExportService
         }
         throw new \Exception("Class {$class} does not exist");
     }
+
+    public function exportFromArray(array $data, array $headerFields, $exportClass)
+    {
+        $type = strtoupper($exportClass);
+        $class = 'VMBDataExport\\Export\\' . $type . 'Export';
+
+        if (class_exists($class)) {
+            if (null === $this->class) {
+                $this->class = new $class($this->em);
+            }
+            if ($this->class instanceof ExportDataServiceInterface) {
+                $this->class->writeCustomData($data, $headerFields);
+                return $this->class->export();
+            }
+            throw new \Exception("Class {$class} must implements 'VMBDataExport\\Export\\ExportDataServiceInterface' ");
+        }
+        throw new \Exception("Class {$class} does not exist");
+    } 
 }
