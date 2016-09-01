@@ -2,9 +2,6 @@
   "name":"vitorbarros/vmb-zf2-data-export-module",
   "description":"Módulo de exportação de dados em CSV, PDF e etc",
   "type":"library",
-  "require": {
-    "doctrine/doctrine-orm-module":"*"
-  },
   "authors": [
     {
       "name":"Vitor Monteiro de Barros",
