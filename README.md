@@ -2,6 +2,10 @@
 
 ## Instalação
 
+### Observação
+Para que o módulo funcione de forma correta, é necessário seguir as instruções de instalação do módulo do Doctrine.
+`https://github.com/doctrine/DoctrineORMModule`
+
 ### ZF2 Data Export Module
 
 Rode
