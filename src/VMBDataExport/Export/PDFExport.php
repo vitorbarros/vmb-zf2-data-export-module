@@ -2,6 +2,7 @@
 namespace VMBDataExport\Export;
 
 use Doctrine\ORM\EntityManager;
+use mikehaertl\wkhtmlto\Pdf;
 
 class PDFExport implements ExportDataServiceInterface
 {
@@ -11,6 +12,21 @@ class PDFExport implements ExportDataServiceInterface
      */
     private $em;
 
+    /**
+     * @var string
+     */
+    private $path;
+
+    /**
+     * @var string
+     */
+    private $html;
+
+    /**
+     * @var string
+     */
+    private $link;
+
     public function __construct(EntityManager $em)
     {
         $this->em = $em;
@@ -18,12 +34,28 @@ class PDFExport implements ExportDataServiceInterface
 
     public function writeData(array $dados)
     {
-        //TODO implement this action
     }
 
     public function export()
     {
-        //TODO implement this action
+        $name = md5(rand(0, 999)) . '.pdf';
+        $path = __DIR__ . '/../../../../../../public/pdf/';
+        $pdf = new Pdf();
+
+        if ($this->link) {
+            $pdf->addPage($this->link);
+        }
+
+        if ($this->html) {
+            $pdf->addPage($this->html);
+        }
+
+        if ($this->path) {
+            $pdf->addPage($this->path);
+        }
+
+        $pdf->saveAs($path . $name);
+        return $pdf->send($name);
     }
 
     /**
@@ -33,6 +65,8 @@ class PDFExport implements ExportDataServiceInterface
      */
     public function writeCustomData(array $data, array $headers)
     {
-        // TODO: Implement writeCustomData() method.
+        $this->link = isset($dados['link']) ? $dados['link'] : false;
+        $this->html = isset($dados['html']) ? $dados['html'] : false;
+        $this->path = isset($dados['path']) ? $dados['path'] : false;
     }
 }
