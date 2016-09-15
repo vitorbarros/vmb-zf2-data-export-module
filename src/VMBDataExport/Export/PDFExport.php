@@ -1,6 +1,6 @@
 <?php
 namespace VMBDataExport\Export;
-
+require __DIR__ .'/../../../vendor/autoload.php';
 use Doctrine\ORM\EntityManager;
 use mikehaertl\wkhtmlto\Pdf;
 
@@ -55,7 +55,7 @@ class PDFExport implements ExportDataServiceInterface
         }
 
         $pdf->saveAs($path . $name);
-        return $pdf->send($name);
+        return '/pdf/'.$name;
     }
 
     /**
@@ -65,8 +65,8 @@ class PDFExport implements ExportDataServiceInterface
      */
     public function writeCustomData(array $data, array $headers)
     {
-        $this->link = isset($dados['link']) ? $dados['link'] : false;
-        $this->html = isset($dados['html']) ? $dados['html'] : false;
-        $this->path = isset($dados['path']) ? $dados['path'] : false;
+        $this->link = isset($data['link']) ? $data['link'] : false;
+        $this->html = isset($data['html']) ? $data['html'] : false;
+        $this->path = isset($data['path']) ? $data['path'] : false;
     }
 }
