@@ -12,5 +12,8 @@
     "psr-0": {
       "VMBDataExport\\":"src/"
     }
+  },
+  "require": {
+    "mikehaertl/phpwkhtmltopdf": "^2.2"
   }
 }
