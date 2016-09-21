@@ -1,6 +1,5 @@
 <?php
 namespace VMBDataExport\Export;
-require __DIR__ .'/../../../vendor/autoload.php';
 use Doctrine\ORM\EntityManager;
 use mikehaertl\wkhtmlto\Pdf;
 
