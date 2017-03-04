@@ -9,7 +9,7 @@ Para que o módulo funcione de forma correta, é necessário seguir as instruç�
 ### ZF2 Data Export Module
 
 Rode
-`php composer.phar vitorbarros/vmb-zf2-data-export-module`
+`php composer.phar require vitorbarros/vmb-zf2-data-export-module`
 
 Após, adicione os seguintes modulos  
 `DoctrineModule`, `DoctrineORMModule`, `DoctrineDataFixtureModule` and `VMBDataExport` no seguinte arquivo: `config/application.config.php`
