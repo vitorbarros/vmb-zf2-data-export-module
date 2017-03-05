@@ -74,9 +74,9 @@ class YourController extends AbstractCrudController
   <?php echo $this->formhidden($form->get('type')); ?>
   <?php echo $this->formhidden($form->get('redirect_to')); ?>
   <?php echo $this->formhidden($form->get('headers')); ?>
-  <?php echo $this->formsubmit($form->get('submit'); ?>
+  <?php echo $this->formsubmit($form->get('submit')); ?>
 
-<?php echo $this->form()->closeTag(); ?>
+<?php echo $this->form()->closeTag();
 
 ```
 
