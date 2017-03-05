@@ -18,6 +18,7 @@
     }
   },
   "require": {
-    "mikehaertl/phpwkhtmltopdf": "^2.2"
+    "mikehaertl/phpwkhtmltopdf": "^2.2",
+    "zendframework/zend-math": "^2.0",
   }
 }

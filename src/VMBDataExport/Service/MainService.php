@@ -29,7 +29,6 @@ class MainService
             $class = 'VMBDataExport\\Export\\' . $type . 'Export';
 
             if (class_exists($class)) {
-
                 if (null === $this->responsableClass) {
                     $this->responsableClass = new $class($this->em);
                 }
