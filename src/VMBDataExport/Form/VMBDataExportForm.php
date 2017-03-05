@@ -5,7 +5,7 @@ use Zend\Form\Form;
 
 ;
 
-class Export extends Form
+class VMBDataExportForm extends Form
 {
 
     public function __construct($name = null)
@@ -59,14 +59,13 @@ class Export extends Form
         ));
 
         $this->add(array(
-            'name' => 'submit',
+            'name' => 'export',
             'type' => 'Zend\Form\Element\Submit',
             'attributes' => array(
                 'value' => 'Exportar',
-                'class' => 'btn btn-success custom-btn'
+                'class' => 'btn btn-default'
             )
         ));
-
     }
 
 }

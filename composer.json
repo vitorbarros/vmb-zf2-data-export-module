@@ -1,11 +1,15 @@
 {
-  "name":"vitorbarros/vmb-zf2-data-export-module",
+  "name":"matiasiglesias/vmb-zf2-data-export-module",
   "description":"Módulo de exportação de dados em CSV, PDF e etc",
   "type":"library",
   "authors": [
     {
       "name":"Vitor Monteiro de Barros",
       "email":"vitormonteirodebarros@gmail.com"
+    },
+    {
+      "name":"Matias Iglesias",
+      "email":"matiasiglesias@matiasiglesias.com.ar"
     }
   ],
   "autoload": {

@@ -1,4 +1,5 @@
 # Módulo para exportação de dados em CSV, XSL, e PDF
+Based on [Módulo de exportação de dados de Vitor Monteiro de Barros](https://github.com/vitorbarros/vmb-zf2-data-export-module)
 
 ## Instalação
 
@@ -24,6 +25,28 @@ Cria os seguintes diretórios
 `public/pdf`
 
 `public/csv`
+
+### Form ###
+Your form can extend VMBDataExportForm Class like this:
+
+```php
+<?php
+namespace MyModule\Form;
+
+use Zend\Form\Form;
+
+class FilterClaimForm extends VMBDataExportForm {
+
+	public function __construct($name = null, $options = array())
+	{
+		parent::__construct('my-form');
+		
+		/**
+		* All your controls here
+		*/
+	}
+}
+```
 
 ### Export de dados através de entidades
 
