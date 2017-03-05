@@ -103,6 +103,41 @@ class YourController extends AbstractCrudController
 
 ```
 
+### Export Throw service injected in your Controller
+
+```php
+
+namespace MyNameSpace
+
+use VMBDataExport\Service\MainService;
+class MyController
+{
+	private $exportService;
+	
+	public function __contruct(MainService $exportService)
+	{
+		$this->exportService = $exportService;
+	}
+	
+	public function CustomAction() {
+		$filename = $this->exportService->strategy('xls', [
+		'entity' => 'My\Entity\Name',
+			'method' => 'filter', //You can call a custom Entity Repository Method
+          'criteria' => Json::encode(
+          	[$your_criteria_array]
+			),
+			'headers' => Json::encode([
+				'field1',
+             	'field2',
+             	// ...
+			]),
+		]);
+		
+		return $this->redirect()->toUrl($filename);
+	}
+}
+```
+
 ### Export de dados com query customizada
 
 ```php

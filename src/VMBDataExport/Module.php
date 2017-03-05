@@ -1,6 +1,7 @@
 <?php
 namespace VMBDataExport;
 
+use VMBDataExport\Controller\DataExportController;
 use VMBDataExport\Service\CustomExportService;
 use Zend\ModuleManager\Feature\AutoloaderProviderInterface;
 use Zend\ModuleManager\Feature\ConfigProviderInterface;
@@ -74,14 +75,12 @@ class Module implements
     public function getControllerConfig()
     {
         return array(
-            'controllers' => array(
-                'factories' => array(
-                    'data-export' => function ($sm) {
-                        return new DataExportController(
-                            $sm->getServiceLocator()->get('VMBDataExport\Service\MainService')
-                        );
-                    }
-                ),
+            'factories' => array(
+                'data-export' => function ($sm) {
+                    return new DataExportController(
+                        $sm->getServiceLocator()->get('VMBDataExport\Service\MainService')
+                    );
+                }
             ),
         );
     }

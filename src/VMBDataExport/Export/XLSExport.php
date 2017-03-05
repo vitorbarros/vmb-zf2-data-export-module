@@ -28,15 +28,26 @@ class XLSExport implements ExportDataServiceInterface
         $criteria = Json::decode($dados['criteria'], Json::TYPE_ARRAY);
         $this->headers = Json::decode($dados['headers'], Json::TYPE_ARRAY);
         $entity = $dados['entity'];
+        $method = isset($dados['method'])?$dados['method']:null;
         $sql = null;
         $result = array();
         $resultFormated = array();
         $entityData = array();
 
-        if (empty($criteria)) {
-            $entityData = $this->em->getRepository($entity)->findAll();
+        if (!empty($method)) {
+            $entityRepository = $this->em->getRepository($entity);
+            $entityData = call_user_func([
+                    $entityRepository,
+                    $method
+                ],
+                $criteria
+            );
         } else {
-            $entityData = $this->em->getRepository($entity)->findBy($criteria);
+            if (empty($criteria)) {
+                $entityData = $this->em->getRepository($entity)->findAll();
+            } else {
+                $entityData = $this->em->getRepository($entity)->findBy($criteria);
+            }
         }
 
         foreach ($entityData as $data) {
