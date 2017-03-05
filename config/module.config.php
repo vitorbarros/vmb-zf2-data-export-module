@@ -18,13 +18,4 @@ return array(
             ),
         ),
     ),
-    'controllers' => array(
-        'factories' => array(
-            'data-export' => function ($sm) {
-                return new DataExportController(
-                    $sm->getServiceLocator()->get('VMBDataExport\Service\MainService')
-                );
-            }
-        ),
-    ),
 );
