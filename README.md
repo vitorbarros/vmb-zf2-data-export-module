@@ -1,4 +1,5 @@
 # Módulo para exportação de dados em CSV, XSL, e PDF
+Based on [Módulo de exportação de dados de Vitor Monteiro de Barros](https://github.com/vitorbarros/vmb-zf2-data-export-module)
 
 ## Instalação
 
@@ -9,7 +10,7 @@ Para que o módulo funcione de forma correta, é necessário seguir as instruç�
 ### ZF2 Data Export Module
 
 Rode
-`php composer.phar vitorbarros/vmb-zf2-data-export-module`
+`php composer.phar require vitorbarros/vmb-zf2-data-export-module`
 
 Após, adicione os seguintes modulos  
 `DoctrineModule`, `DoctrineORMModule`, `DoctrineDataFixtureModule` and `VMBDataExport` no seguinte arquivo: `config/application.config.php`
@@ -24,6 +25,28 @@ Cria os seguintes diretórios
 `public/pdf`
 
 `public/csv`
+
+### Form ###
+Your form can extend VMBDataExportForm Class like this:
+
+```php
+<?php
+namespace MyModule\Form;
+
+use Zend\Form\Form;
+
+class FilterClaimForm extends VMBDataExportForm {
+
+	public function __construct($name = null, $options = array())
+	{
+		parent::__construct('my-form');
+		
+		/**
+		* All your controls here
+		*/
+	}
+}
+```
 
 ### Export de dados através de entidades
 
@@ -74,10 +97,45 @@ class YourController extends AbstractCrudController
   <?php echo $this->formhidden($form->get('type')); ?>
   <?php echo $this->formhidden($form->get('redirect_to')); ?>
   <?php echo $this->formhidden($form->get('headers')); ?>
-  <?php echo $this->formsubmit($form->get('submit'); ?>
+  <?php echo $this->formsubmit($form->get('submit')); ?>
 
-<?php echo $this->form()->closeTag(); ?>
+<?php echo $this->form()->closeTag();
 
+```
+
+### Export Throw service injected in your Controller
+
+```php
+
+namespace MyNameSpace
+
+use VMBDataExport\Service\MainService;
+class MyController
+{
+	private $exportService;
+	
+	public function __contruct(MainService $exportService)
+	{
+		$this->exportService = $exportService;
+	}
+	
+	public function CustomAction() {
+		$filename = $this->exportService->strategy('xls', [
+		'entity' => 'My\Entity\Name',
+			'method' => 'filter', //You can call a custom Entity Repository Method
+          'criteria' => Json::encode(
+          	[$your_criteria_array]
+			),
+			'headers' => Json::encode([
+				'field1',
+             	'field2',
+             	// ...
+			]),
+		]);
+		
+		return $this->redirect()->toUrl($filename);
+	}
+}
 ```
 
 ### Export de dados com query customizada
