@@ -7,6 +7,7 @@ namespace VMBDataExport\Export;
 use Doctrine\ORM\EntityManager;
 use Doctrine\ORM\EntityRepository;
 use Doctrine\ORM\Mapping\Entity;
+use VMBDataExport\Entity\ExportableInterface;
 use Zend\Json\Json;
 use Zend\Math\Rand;
 
@@ -89,9 +90,9 @@ abstract class Export implements ExportDataServiceInterface
         if (!class_exists($this->entity)) {
             throw new \BadMethodCallException("Entity {$this->entity} does not exists");
         }
-        if ($this->entity instanceof \ExportableInterface) {
+        if ($this->entity instanceof ExportableInterface) {
             throw new \BadMethodCallException(
-                "Exportable Entity {$this->entity} must implements 'VMBDataExport\\Interface\\ExportableInterface'"
+                "Exportable Entity {$this->entity} must implements 'VMBDataExport\\Entity\\ExportableInterface'"
             );
         }
         $this->criteria = Json::decode($config['criteria'], Json::TYPE_ARRAY);

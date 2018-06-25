@@ -29,7 +29,7 @@ class XLSExport extends Export
             throw new \Exception("Please make sure that 'public/xls' directory exists");
         }
 
-        $fileName = str_replace("/", ".", $this->getFilePrefix() . '_' . date("Y-m-d-H:i:s") . '.xls');
+        $fileName = str_replace("/", ".", $this->getFilePrefix() . '_' . date("Y-m-d-H-i-s") . '.xls');
 
         $file = fopen($path . $fileName, "w");
         $count = 0;
