@@ -32,7 +32,7 @@ class CSVExport extends Export
         if (!is_dir($path)) {
             throw new \Exception("Please make sure that 'public/csv' directory exists");
         }
-        $fileName = str_replace("/", ".", $this->getFilePrefix() . '_' . date("Y-m-d-H:i:s") . '.csv');
+        $fileName = str_replace("/", ".", $this->getFilePrefix() . '_' . date("Y-m-d-H-i-s") . '.csv');
         $file = fopen($path . $fileName, "w");
 
         fputcsv($file, $this->headers);

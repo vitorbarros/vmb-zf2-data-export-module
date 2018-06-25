@@ -52,6 +52,13 @@ class CustomExportService
         throw new \Exception("Class {$class} does not exist");
     }
 
+    /**
+     * @param array $data
+     * @param array $headerFields
+     * @param $exportClass
+     * @return mixed
+     * @throws \Exception
+     */
     public function exportFromArray(array $data, array $headerFields, $exportClass)
     {
         $type = strtoupper($exportClass);
