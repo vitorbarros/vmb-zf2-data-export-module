@@ -17,6 +17,10 @@ class XLSExport extends Export
         $this->resultFormatedData = $result;
     }
 
+    /**
+     * @return mixed|string
+     * @throws \Exception
+     */
     public function export()
     {
 

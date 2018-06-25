@@ -22,6 +22,10 @@ class CSVExport extends Export
 
     }
 
+    /**
+     * @return mixed|string
+     * @throws \Exception
+     */
     public function export()
     {
         $path = __DIR__ . '/../../../../../../public/csv/';
@@ -47,6 +51,8 @@ class CSVExport extends Export
      */
     public function writeCustomData(array $data, array $headers)
     {
-        // TODO: Implement writeCustomData() method.
+        $this->resultFormatedData = $data;
+        $this->headers = $headers;
+        return $this;
     }
 }
